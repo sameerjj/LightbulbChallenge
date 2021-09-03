@@ -16,7 +16,7 @@ class PickSimulationActivity : AppCompatActivity(), PickSimulationView {
         presenter = PickSimulationPresenter(this)
 
         binding.button.setOnClickListener {
-            presenter?.runSimulation(4, 20, 4)
+            presenter?.runSingleSimulation(4, 20, 4)
         }
     }
 
