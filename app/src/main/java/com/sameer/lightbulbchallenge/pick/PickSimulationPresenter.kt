@@ -20,7 +20,7 @@ class PickSimulationPresenter(val view: PickSimulationView) {
         }
 
         var uniqueColors = 0
-        for (i in 1..numColors){
+        for (i in 0..numColors){
             val colorCount = pickMap[i]
             if (colorCount != null && colorCount > 0){
                 uniqueColors += 1
