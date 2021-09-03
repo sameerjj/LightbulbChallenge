@@ -14,7 +14,10 @@ class PickSimulationActivity : AppCompatActivity(), PickSimulationView {
         binding = ActivityPickSimulationBinding.inflate(layoutInflater)
         setContentView(binding.root)
         presenter = PickSimulationPresenter(this)
-        presenter?.runSingleSimulation(4, 20, 4)
+
+        binding.button.setOnClickListener {
+            presenter?.runSimulation(4, 20, 4)
+        }
     }
 
     override fun displaySingleSimOutput(numUniqueColours: Double) {

@@ -4,25 +4,34 @@ import kotlin.random.Random
 
 class PickSimulationPresenter(val view: PickSimulationView) {
 
-    /// run Single simulation, determine and display number of unique colors
-    fun runSingleSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int) {
-        //map to keep track of numColor bulbs
-        val pickMap: MutableMap<Int, Int> = mutableMapOf()
-//        for (i in 1..numColors){
-//            pickMap[i] = 0
-//        }
+    fun runSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int) {
+        // array where each index represents a color and the number of bulbs left in that color
+        val marbleArray = IntArray(numColors)
+        for (i in 0 until numColors) {
+            marbleArray[i] = numOfEachColor
+        }
 
-        val numBulbs = numColors*numOfEachColor
-        for (i in 1..numPicks){
-            val pick = Random.nextInt(1, numBulbs)
-            val color = pick/numOfEachColor
-            pickMap[color] = (pickMap[color] ?: 0) + 1
+
+        var numBulbs = numColors * numOfEachColor
+        // pick a random number out of the bulbs remaining, using the array as a sorting bucket to determine what color the bulb is
+        for (i in 0 until numPicks) {
+            var pick = Random.nextInt(numBulbs)
+            for (j in 0 until numColors) {
+                pick -= marbleArray[j]
+                if (pick < 0) {
+                    // found the bucket in which this bulb belongs, subtract it from the bucket count
+                    marbleArray[j] -= 1
+                    break;
+                }
+            }
+            // decrement the number of bulbs remaining
+            numBulbs -= 1
         }
 
         var uniqueColors = 0
-        for (i in 0..numColors){
-            val colorCount = pickMap[i]
-            if (colorCount != null && colorCount > 0){
+        for (i in 0 until numColors) {
+            // any bucket with less than the number of each color has been selected and therefore goes towards the unique count
+            if (marbleArray[i] < numOfEachColor) {
                 uniqueColors += 1
             }
         }
