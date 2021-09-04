@@ -4,12 +4,21 @@ import kotlin.random.Random
 
 class PickSimulationPresenter(val view: PickSimulationView) {
 
-    fun runSingleSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int){
+    fun runSingleSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int) {
         val uniqueColors = runSimulation(numColors, numOfEachColor, numPicks)
-        view.displaySingleSimOutput(uniqueColors.toDouble())
+        view.displaySimulationOutput(uniqueColors.toDouble())
     }
 
-    fun runSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int): Int {
+    fun runMultipleSimulations(numColors: Int, numOfEachColor: Int, numPicks: Int, numSimulations: Int) {
+        var uniqueColorsSum = 0.0
+        for (i in 0 until numSimulations) {
+            uniqueColorsSum += runSimulation(numColors, numOfEachColor, numPicks)
+        }
+
+        view.displaySimulationOutput(uniqueColorsSum/numSimulations)
+    }
+
+    private fun runSimulation(numColors: Int, numOfEachColor: Int, numPicks: Int): Int {
         // array where each index represents a color and the number of bulbs left in that color
         val marbleArray = IntArray(numColors)
         for (i in 0 until numColors) {
