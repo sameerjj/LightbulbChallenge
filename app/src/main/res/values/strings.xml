@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">LightbulbChallenge</string>
+    <string name="number_of_lightbulb_colours">Number of Lightbulb Colours:</string>
+    <string name="hint_text">0</string>
+    <string name="quantity_of_each_lightbulb_colour">Quantity of Each Lightbulb Colour:</string>
+    <string name="number_of_simulations">Number of Simulations:</string>
+    <string name="results">The average of unique colors for your simulation is : %s</string>
+    <string name="run_simulation">Run Simulation</string>
+    <string name="error">Error</string>
+    <string name="error_message">Unable to accept inputs, please check your values and try again</string>
+    <string name="number_of_lightbulbs_to_pick">Number of Lightbulbs to Pick</string>
+</resources>
